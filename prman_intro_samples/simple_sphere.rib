@@ -2,6 +2,7 @@ Display "simple_sphere" "tiff" "rgb"
 Projection "perspective" "fov" 40
 Format 640 480 1
 
+
 WorldBegin
    TransformBegin
     Translate 1 1 1
@@ -11,18 +12,43 @@ WorldBegin
   # Surface "shaders/plastic_with_texture" "texturemap" ["textures/default.tex"]
   # Surface "shaders/plastic_with_texture" "texturemap" ["textures/grid.tex"]
   TransformBegin
-    	Translate 0 0 1
+    	Translate 0 0 1.2
 		Rotate -90 1 0 0
 		Rotate 90 0 0 1
 		Scale 0.2 0.2 0.2
     Sphere 0.5 0.0 0.5 360.0
     Translate 0 0 -1.23
-    Cylinder  0.5 0 1.2 360
+    Rotate 50 0 0 1
+    Cylinder  0.5 0.1 1.2 360
     Translate 0 0 0
-    Disk 0 0.5 360.0
-    Translate 0.5 0.5 0
-    Scale 0.2 0.5 0.7
-    Geometry "cube"
-    
+    Disk 0.1 0.5 360.0
+    TransformBegin
+    	Translate 0 0.1 0.9
+    	Rotate 90 1 0 0
+    	Cylinder  0.2 -0.5 -0.4 360
+    	Translate 0 0 0
+    	Disk -0.5 0.2 360.0
+    	Rotate -90 1 0 0
+	    Translate 0 0.45 -0.4
+	    Scale 0.3 0.1 0.9
+	    Geometry "cube"
+	    Translate 0 0 0
+	    Rotate 180 0 1 0
+	    Paraboloid 0.9 0.4 0.9 360 
+  	TransformEnd
+  	TransformBegin
+    	Translate 0 -1 0.9
+    	Rotate 90 1 0 0
+    	Cylinder  0.2 -0.5 -0.4 360
+    	Translate 0 0 0
+    	Disk -0.5 0.2 360.0
+    	Rotate -90 1 0 0
+	    Translate 0 0.45 -0.4
+	    Scale 0.3 0.1 0.9
+	    Geometry "cube"
+	    Translate 0 0 0
+	    Rotate 180 0 1 0
+	    Paraboloid 0.9 0.4 0.9 360 
+  	TransformEnd
   TransformEnd
 WorldEnd
