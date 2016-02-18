@@ -1,0 +1,67 @@
+Display "simple_sphere" "tiff" "rgb"
+Projection "perspective" "fov" 40
+Format 640 480 1
+
+Translate 0 0 4
+
+WorldBegin
+	Surface "shaders/constant"
+	#body
+	TransformBegin
+		Scale 0.3 0.7 0.7
+		Rotate 90 1 0 0
+		Sphere 1 0.6 -0.6 360.0
+		Disk 0.6 0.8 360
+		Disk -0.6 0.8 360
+		#neck
+		Cylinder 0.3 -0.6 -0.8 360
+		#head
+		TransformBegin
+			Scale 1 1 0.5
+			Translate 0 0 -2
+			Sphere 0.5 0.4 -0.4 360
+		TransformEnd
+		#rightleg
+		TransformBegin
+			Scale 1 1 2
+			Translate 0.5 0 0.5
+			Rotate -90 1 0 0
+			Sphere 0.4 0.4 -0.4 360
+		TransformEnd
+		#leftleg
+		TransformBegin
+			Scale 1 1 2
+			Translate -0.5 0 0.5
+			Rotate -90 1 0 0
+			Sphere 0.4 0.4 -0.4 360
+		TransformEnd
+		#righthand
+		TransformBegin
+			Translate 1.5 0 -0.3
+			Rotate -15 0 1 0
+			Scale 1.8 0.5 0.5
+			Sphere 0.5 0.5 -0.5 360
+			#forehand
+			TransformBegin
+				Translate 0.4 0 0.4
+				Rotate 90 0 1 0
+				Scale 1.8 0.5 0.5
+				Sphere 0.4 0.4 -0.4 360
+			TransformEnd
+		TransformEnd
+		#hand
+		TransformBegin
+			Translate -1.5 0 -0.3
+			Rotate 15 0 1 0
+			Scale 1.8 0.5 0.5
+			Sphere 0.5 0.5 -0.5 360
+			#forehand
+			TransformBegin
+				Translate -0.4 0 0.4
+				Rotate 90 0 1 0
+				Scale 1.8 0.5 0.5
+				Sphere 0.4 0.4 -0.4 360
+			TransformEnd
+		TransformEnd
+	TransformEnd
+WorldEnd
