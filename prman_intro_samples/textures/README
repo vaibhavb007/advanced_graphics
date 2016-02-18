@@ -1,0 +1,66 @@
+Environments
+------------
+
+street.env: (512x256) A street scene lat-long environment map.
+
+desert.env: (512x256) A desert-like scene lat-long environment map.
+
+Luxo-Jr_4000x2000.tex (4kx2k) An HDRI capture by Dylan Sisson from 
+    beside the giant Luxo Jr residing in front of The Steve Jobs building
+    at Pixar's headquarters.
+
+Textures
+--------
+All textures are periodic.  They will repeat with no seams.  However,
+they may have problems with "bands" appearing if they are rendered with
+too many small copies.
+
+brick.tex: (128x128) This is some reddish "staggered" bricks with grey
+    mortar.  The bricks cast shadows.  One texture copy contains
+    a full top brick and two "halves" of lower bricks.
+
+boundingR.tex: (1kx1k).  This is the famous bounding R prman logo. Since it
+    is a trademark of Pixar, it should not be used for any commercial
+    purposes.
+
+grass.tex: (128x128) A bright green lawn which will look like a golf green.
+    This has "banding" problems.
+
+lattice.tex: (64x64) A greyish-blue diagonal wooden lattice, like a rose
+    trellis.  Casts shadows on itself.
+
+pebbles.tex: (256x256) Lots of variously-sized and colored pebbles and
+    rocks. Look as though they may be set in concrete, but not
+    obviously.  This can have banding problems also.
+
+shingle.tex: (128x128) Dark brown asphalt roof shingles. Non-overlapping.
+    One texture copy contains one top shingle and two halves of
+    lower shingles.
+
+grid.tex: (512x512) Useful for showing the s,t grid of the surface
+        for debugging purposes.
+
+earth.tex: (256x128) Single channel greyscale of earth suitable for mapping 
+    onto a sphere.
+
+mona_smile.tex: (128x128) Single channel greyscale of Mona Lisa with
+    silly grin.
+
+
+Flower pattern textures
+-----------------------
+A set of five matched periodic textures using the same pattern.
+For example uses see the look examples under pictures_as_anything.
+
+flowers.tex: (128x128) colored flower textile print
+
+flowers.dis: (128x128) rough displacement map for the flower pattern.
+
+flowers_flat.dis: (128x128) smooth displacement map for flower pattern.
+
+flowers_mask.try: (128x128) transparency map for masking out all but
+    the flowers.
+
+flowers_invmask.try: (128x128) transparency map for masking out just
+    the flowers.
+

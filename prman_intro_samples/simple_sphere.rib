@@ -3,48 +3,88 @@ Display "simple_sphere" "tiff" "rgba"
 Projection "perspective" "fov" 40
 Format 640 480 1
 
-Translate 0 0 10
+
+PixelSamples 5 5 
+Translate 0 0 4	
+
+Attribute "visibility" "int diffuse" [1]
+Attribute "visibility" "int specular" [1]
+Attribute "visibility" "int transmission" [1]
+Attribute "photon" "causticmap" "caus.cpm"
+Attribute "photon" "estimator" 200
+
+
 WorldBegin
   #  TransformBegin
     Translate 0 0 1
      LightSource "shaders/spotlight" 1 "intensity" [100] "from" [5 6 -5] "to" [0 0 0]
      LightSource "shaders/spotlight" 1 "intensity" [100] "from" [-4 6 -5] "to" [0 0 0]
+     LightSource "shaders/spotlight" 1 "intensity" [10] "from" [0 1 -2] "to" [0 0 -2]
+     LightSource "shaders/spotlight" 1 "intensity" [100] "from" [0 -2 -10] "to" [0 5 0]
   # TransformEnd
-  	Surface "shaders/plastic_with_texture"
+  Attribute "trace" "int maxdiffusedepth" [2]
+  	
   # Surface "shaders/plastic_with_texture" "texturemap" ["textures/default.tex"]
   # Surface "shaders/plastic_with_texture" "texturemap" ["textures/grid.tex"]
+  
   TransformBegin
-  Color [1 0 0]
-  # Scale 2 2 2
-  Polygon "P" [2 0 0 2 2 0 4 2 2 4 0 2] "st" [0 0 0 1 1 1 1 0]
+  Translate -0.5 -0.5 -1
+  Surface "shaders/metal"
+  	Sphere 0.2 -0.2 -0.3 360.0
+	Translate 0.5 0.5 1
+	Translate 0.6 -0.5 -2
+  Surface "shaders/transparent"
+  	Sphere 0.2 -0.2 -0.3 360.0
+	Translate -0.6 0.5 2
+  Surface "shaders/texturf"
+  Color [0 0.8 0.1]
+  Polygon "P" [1.2 -1 0 1.2 1 0 1.5 1 -5 1.5 -1 -5] "st" [0 0 0 1 1 1 1 0]
   # Color [1 1 0]
-  # Polygon "P" [-5 0 2 -5 5 2 5 5 2 5 0 2]
+  Color [1 1 1]
+  Surface "shaders/plastic2"
+  Polygon "P" [-1.2 -1 0 -1.2 1 0 -1.5 1 -5 -1.5 -1 -5] "st" [0 0 0 1 1 1 1 0]
+  # Color [1 1 1]
+  Surface "shaders/plastic1"
+  Polygon "P" [-1.2 -1 0 -1.2 1 0 1.2 1 0 1.2 -1 0] "st" [0 0 0 1 1 1 1 0]
+  # Color [1 1 1]
+  Polygon "P" [-1.2 1 0 1.2 1 0 1.5 1 -5 -1.5 1 -5] "st" [0 0 0 1 1 1 1 0]
+  # Color [1 1 1]
+  Polygon "P" [-1.2 -1 0 1.2 -1 0 1.5 -1 -5 -1.5 -1 -5] "st" [0 0 0 1 1 1 1 0]
+  # Color [1 1 1]
+  # Polygon "P" [-1.2 -1 0 -1.2 1 0 1.2 1 0 1.2 -1 0] "st" [0 0 0 1 1 1 1 0]
     # "st" [0 0 0 1 1 1 1 0]
-    	Translate 0 0 1.2
+    Surface "shaders/plastic_with_texture_e"
+    	Translate 0 -0.3 -1.2
 		Rotate -90 1 0 0
 		Rotate 90 0 0 1
-		Scale 0.2 0.2 0.2
+		Scale 0.5 0.5 0.5
     Sphere 0.5 0.0 0.5 360.0
     Translate 0 0 -1.23
-    Rotate 50 0 0 1
+    Rotate 30 0 0 1
+    Surface "shaders/flower"
     Cylinder  0.5 0.1 1.2 360
     Translate 0 0 0
     Disk 0.1 0.5 360.0
     TransformBegin
+    Surface "shaders/plastic_with_texture_e"
     	Translate 0 0.1 0.9
     	Rotate 90 1 0 0
     	Cylinder  0.2 -0.5 -0.4 360
     	Translate 0 0 0
     	Disk -0.5 0.2 360.0
     	Rotate -90 1 0 0
-	    Translate 0 0.45 -0.4
+	    Translate 0 0.45 -0.4	
 	    Scale 0.3 0.1 0.9
 	    Geometry "cube"
 	    Translate 0 0 0
 	    Rotate 180 0 1 0
-	    Paraboloid 0.9 0.4 0.9 360 
+	    Surface "shaders/metal"
+	    Color 0 0 0
+	    Paraboloid 0.9 0.4 0.9 360
+	    Color 1 1 1 
   	TransformEnd
   	TransformBegin
+  	Surface "shaders/plastic_with_texture_e"
     	Translate 0 -1 0.9
     	Rotate 90 1 0 0
     	Cylinder  0.2 -0.5 -0.4 360
@@ -56,8 +96,12 @@ WorldBegin
 	    Geometry "cube"
 	    Translate 0 0 0
 	    Rotate 180 0 1 0
+	    Surface "shaders/metal"
+	    Color 0 0 0 
 	    Paraboloid 0.9 0.4 0.9 360 
-  	TransformEnd
+  	TransformEnd 
+  	
   TransformEnd
+  
 WorldEnd
 FrameEnd 

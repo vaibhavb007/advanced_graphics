@@ -1,16 +1,16 @@
 shader_obj 5.0 1 0
 plastic_with_texture 39 4 15 9 27 0 6 6 0 6 13 1
-10 146
+10 171
 rgb
 current
-/home/sshrestha/apurva_prman_ppt
+/home/lokit/Desktop/advanced_graphics/prman_intro_samples/shaders
 .:
-shaders/plastic_with_texture.sl
+plastic_with_texture.sl
 textures/grid.tex
 surface
 
-$meta_1700
-$meta___PRMAN_RELEASE__1700
+$meta_2006
+$meta___PRMAN_RELEASE__2006
 4
 0.5
 1
