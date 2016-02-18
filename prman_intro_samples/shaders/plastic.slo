@@ -1,16 +1,16 @@
 shader_obj 5.0 1 0
 plastic 36 6 15 9 25 0 5 5 0 5 13 1
-10 128
+10 153
 rgb
 current
 !!anyspace!!
-/home/sshrestha/apurva_prman_ppt
+/home/lokit/Desktop/advanced_graphics/prman_intro_samples/shaders
 .:
-shaders/plastic.sl
+plastic.sl
 surface
 
-$meta_1700
-$meta___PRMAN_RELEASE__1700
+$meta_2006
+$meta___PRMAN_RELEASE__2006
 6
 0.5
 1

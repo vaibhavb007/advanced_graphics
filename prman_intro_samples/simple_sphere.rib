@@ -1,17 +1,25 @@
-Display "simple_sphere" "tiff" "rgb"
+FrameBegin 1
+Display "simple_sphere" "tiff" "rgba"
 Projection "perspective" "fov" 40
 Format 640 480 1
 
-
+Translate 0 0 10
 WorldBegin
-   TransformBegin
-    Translate 1 1 1
-    LightSource "shaders/spotlight" 1 "intensity" [100] "from" [5 6 -5] "to" [0 0 0]
-  TransformEnd
-  Surface "shaders/plastic_with_texture"
+  #  TransformBegin
+    Translate 0 0 1
+     LightSource "shaders/spotlight" 1 "intensity" [100] "from" [5 6 -5] "to" [0 0 0]
+     LightSource "shaders/spotlight" 1 "intensity" [100] "from" [-4 6 -5] "to" [0 0 0]
+  # TransformEnd
+  	Surface "shaders/plastic_with_texture"
   # Surface "shaders/plastic_with_texture" "texturemap" ["textures/default.tex"]
   # Surface "shaders/plastic_with_texture" "texturemap" ["textures/grid.tex"]
   TransformBegin
+  Color [1 0 0]
+  # Scale 2 2 2
+  Polygon "P" [2 0 0 2 2 0 4 2 2 4 0 2] "st" [0 0 0 1 1 1 1 0]
+  # Color [1 1 0]
+  # Polygon "P" [-5 0 2 -5 5 2 5 5 2 5 0 2]
+    # "st" [0 0 0 1 1 1 1 0]
     	Translate 0 0 1.2
 		Rotate -90 1 0 0
 		Rotate 90 0 0 1
@@ -52,3 +60,4 @@ WorldBegin
   	TransformEnd
   TransformEnd
 WorldEnd
+FrameEnd 
