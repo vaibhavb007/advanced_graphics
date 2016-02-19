@@ -13,6 +13,6 @@ surface plastic1
     V = -normalize(I);
 
     Oi = Os;
-    Ci = Os * ( Cs * color(0.7, 0.7, 0.4) * (Ka*ambient() + Kd*diffuse(Nf)) +
+    Ci = Os * ( Cs * color(0.4, 0.7, 0.4) * (Ka*ambient() + Kd*diffuse(Nf)) +
 	 	specularcolor * Ks * specular(Nf,V,roughness) );
 }
