@@ -1,4 +1,4 @@
-num_x = 20
+num_x = 10
 num_y = 2
 num_z = 15
 start_x = 0

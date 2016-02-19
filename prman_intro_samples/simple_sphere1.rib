@@ -36,7 +36,7 @@ WorldBegin
      # LightSource "causticlight" 2 "color filter" [0.2 0.2 0.2]
      # LightSource "shaders/spotlight" 1 "intensity" [100] "from" [-4 6 -5] "to" [0 1 0]
      # LightSource "shaders/spotlight" 1 "intensity" [10] "from" [0 1 -2] "to" [1 0 -2]
-     LightSource "shaders/spotlight" 1 "intensity" [10] "from" [0 1 -2] "to" [-1 0 -2]
+     # LightSource "shaders/spotlight" 1 "intensity" [10] "from" [0 1 -2] "to" [-1 0 -2]
      # LightSource "shaders/spotlight" 1 "intensity" [1] "from" [0 -2 -10] "to" [0 5 0]
      ReadArchive "lights.rib"
      # Attribute "photon" "causticmap" "caus.cpm"
@@ -49,20 +49,20 @@ WorldBegin
   TransformBegin
 
 	# AttributeBegin
-		# Translate -0.7 -0.5 -1.5
+		Translate -0.7 -0.6 -3
 		# Attribute "photon" "shadingmodel" "chrome"
-		 # Attribute "photon" "shadingmodel" "chrome"
-		# Surface "shaders/metal"
+		 Attribute "photon" "shadingmodel" "chrome"
+		Surface "shaders/metal"
 		# Color 0.02 0.62 0.98
   		# Surface "aachrome" "color specularcolor" [0.02 0.62 0.98]
-	  	# Sphere 0.3 -0.4 -1 360.0
-	  	# Translate 0.7 0.5 1.5
+	  	Sphere 0.2 -0.4 -1 360.0
+	  	Translate 0.7 0.6 3
   	# AttributeEnd
   	# AttributeBegin
   	Translate 0.6 -0.83 -2
   	# Translate 0 0 -0.2
   # Surface "shaders/transparent"
-  # Attribute "photon" "shadingmodel" "water"
+  Attribute "photon" "shadingmodel" "water"
   Attribute "photon" "shadingmodel" "glass"
     Surface "plausibleGlass""float minSpecularSamples" 25
 
@@ -165,7 +165,7 @@ WorldBegin
 	# AttributeBegin
 	Attribute "photon" "shadingmodel" "matte"
     Surface "shaders/plastic_with_texture_e"
-    	Translate -0.6 0 0
+    	Translate -0.3 0 0
     	Translate 0 -0.3 -1.2
 		Rotate -90 1 0 0
 		Rotate 90 0 0 1

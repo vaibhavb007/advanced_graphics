@@ -16,14 +16,13 @@ Attribute "photon" "estimator" 200
 
 
 WorldBegin
-	# LightSource "shaders/occlusionlight1" 1 "samples" 16
-	# Attribute "visibility" "int diffuse" 1   # make objects visible to rays
-    # Attribute "visibility" "int specular" 1   # make objects visible to rays
-    # Attribute "trace" "bias" 0.005
+
+	Attribute "visibility" "int diffuse" 1   # make objects visible to rays
+    Attribute "visibility" "int specular" 1   # make objects visible to rays
+    Attribute "trace" "bias" 0.005
 
   #  TransformBegin
     Translate 0 0 1
-     LightSource "ambientlight" 1 "intensity" 0.2
      # LightSource "shaders/spotlight" 1 "intensity" [100] "from" [5 6 -5] "to" [0 0 0]
      # LightSource "shaders/spotlight" 1 "intensity" [100] "from" [-4 6 -5] "to" [0 1 0]
      # LightSource "shaders/spotlight" 1 "intensity" [10] "from" [0 1 -2] "to" [1 0 -2]
@@ -39,22 +38,16 @@ WorldBegin
   
   TransformBegin
 
-	# AttributeBegin
 		Translate -0.7 -0.5 -1.5
 		# Attribute "photon" "shadingmodel" "chrome"
 		Surface "shaders/metal"
 	  	Sphere 0.3 -0.4 -1 360.0
 	  	Translate 0.7 0.5 1.5
-  	# AttributeEnd
-  	# AttributeBegin
   	Translate 0.6 -0.5 -2
   Surface "shaders/transparent"
   # Attribute "photon" "shadingmodel" "water"
   	Sphere 0.2 -0.2 -0.3 360.0
   	Translate -0.6 0.5 2
-  	# AttributeEnd
-  # AttributeBegin
-  	# Attribute "photon" "shadingmodel" "matte"
   Surface "shaders/plastic"
   # Color [0 0.8 0.1]
   Polygon "P" [1.2 -1 0 1.2 1 0 1.5 1 -5 1.5 -1 -5] "st" [0 0 0 1 1 1 1 0]
@@ -70,7 +63,6 @@ WorldBegin
   Polygon "P" [-1.2 1 0 1.2 1 0 1.5 1 -5 -1.5 1 -5] "st" [0 0 0 1 1 1 1 0]
   # Color [1 1 1]
   Polygon "P" [-1.2 -1 0 1.2 -1 0 1.5 -1 -5 -1.5 -1 -5] "st" [0 0 0 1 1 1 1 0]
-  # AttributeEnd
   # Color [1 1 1]
   # Polygon "P" [-1.2 -1 0 -1.2 1 0 1.2 1 0 1.2 -1 0] "st" [0 0 0 1 1 1 1 0]
     # "st" [0 0 0 1 1 1 1 0]
