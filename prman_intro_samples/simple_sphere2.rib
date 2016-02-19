@@ -1,0 +1,42 @@
+Format 512 512 1
+Display "singlePassCaustic" "it" "rgba"
+PixelSamples 4 4
+Projection "perspective" "fov" 20
+Transform [-0.707107 -0.408248 -0.57735 0
+           0 0.816497 -0.57735 0
+           0.707107 -0.408248 -0.57735 0
+           0 0 8.66025 1]
+
+# Emit 500000 photons, store them in a transient caustic photon map
+# called 'spcaustic.ptc'.  The caustic() function looks up in the
+# photon map.
+Option "photon" "emit" 500000   # single-pass photon map generation
+Option "photon" "string lifetime" "transient"   # "transient" or "file"
+Attribute "photon" "causticmap" "spcaustic.ptc"
+
+WorldBegin
+  LightSource "shadowspot" 1 "from" [5 5 0] "to" [0 0 0] "intensity" 25
+    "coneangle" 0.25 "string shadowname" "raytrace"
+   LightSource "causticlight" 2 "color filter" [0.2 0.2 0.2]
+
+  Attribute "visibility" "transmission" 1
+  Attribute "visibility" "specular" 1
+  Attribute "visibility" "diffuse" 1
+
+  Attribute "photon" "shadingmodel" "matte"
+  Surface "matte"
+  Polygon "P" [-10 0 10  10 0 10  10 0 -10  -10 0 -10]
+
+  Attribute "photon" "shadingmodel" "glass"
+      Surface "plausibleGlass"
+        "float minSpecularSamples" 25 "float maxSpecularSamples" 25
+
+  Color 0.02 0.62 0.98
+  # Surface "aachrome" "color specularcolor" [0.02 0.62 0.98]
+   Translate 0 0.5 0
+  # Rotate -90 1 0 0
+  Sphere 0.3 -0.2 -2 360.0
+  # Cylinder 1 -0.1 0.5 360
+  # Orientation "inside"
+  # Cylinder 0.99 -0.1 0.5 360
+WorldEnd
