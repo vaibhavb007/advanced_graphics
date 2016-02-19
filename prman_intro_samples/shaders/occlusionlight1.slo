@@ -4,9 +4,9 @@ occlusionlight1 36 4 18 11 15 0 3 3 0 3 14 1
 rgb
 current
 !!anyspace!!
-/home/vpb/sem6/cs775/assignment/advanced_graphics/prman_intro_samples
+/home/vpb/sem6/cs775/assignment/advanced_graphics/prman_intro_samples/shaders
 .:
-shaders/occlusionlight1.sl
+occlusionlight1.sl
 illuminance
 distribution
 cosine

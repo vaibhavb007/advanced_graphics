@@ -15,7 +15,7 @@ Attribute "photon" "estimator" 200
 
 
 WorldBegin
-	LightSource "shaders/occlusionlight1" 1 "samples" 16
+	LightSource "shaders/occlusionlight1" 1 "samples" 256
 	Attribute "visibility" "int diffuse" 1   # make objects visible to rays
     Attribute "visibility" "int specular" 1   # make objects visible to rays
     Attribute "trace" "bias" 0.005
@@ -45,6 +45,8 @@ WorldBegin
   	Sphere 0.2 -0.2 -0.3 360.0
   	Translate -0.6 0.5 2
   	AttributeEnd
+
+  AttributeBegin
   Surface "shaders/texturf"
   Color [0 0.8 0.1]
   Polygon "P" [1.2 -1 0 1.2 1 0 1.5 1 -5 1.5 -1 -5] "st" [0 0 0 1 1 1 1 0]
@@ -58,7 +60,6 @@ WorldBegin
   # Color [1 1 1]
   Polygon "P" [-1.2 1 0 1.2 1 0 1.5 1 -5 -1.5 1 -5] "st" [0 0 0 1 1 1 1 0]
   # Color [1 1 1]
-  AttributeBegin
   Polygon "P" [-1.2 -1 0 1.2 -1 0 1.5 -1 -5 -1.5 -1 -5] "st" [0 0 0 1 1 1 1 0]
   AttributeEnd
   # Color [1 1 1]
