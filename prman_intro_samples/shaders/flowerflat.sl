@@ -1,7 +1,7 @@
 surface flowerflat
 (
   string texturemap = "textures/flowers_flat.dis";
-  float Ks=.5;
+  float Ks=.1;
   float Kd=.5;
   float Ka=1, roughness=.1;
   color specularcolor=1

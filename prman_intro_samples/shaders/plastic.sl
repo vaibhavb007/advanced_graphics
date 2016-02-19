@@ -1,8 +1,8 @@
 surface plastic
 (
-  float Ks = 0.5;
-  float Kd = 0.5;
-  float Ka = 1, roughness = 0.3;
+  float Ks = 0.1;
+  float Kd = 0.3;
+  float Ka = 0.3, roughness = 0.3;
   color specularcolor = 1
 )
 {
@@ -13,6 +13,6 @@ surface plastic
     V = -normalize(I);
 
     Oi = Os;
-    Ci = Os * ( Cs * color(0, 0.8, 0.1) * (Ka*ambient() + Kd*diffuse(Nf)) +
+    Ci = Os * ( Cs * color(0.4, 0.7, 0.1) * (Ka*ambient() + Kd*diffuse(Nf)) +
 	 	specularcolor * Ks * specular(Nf,V,roughness) );
 }
