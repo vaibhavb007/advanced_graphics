@@ -15,14 +15,19 @@ Attribute "photon" "estimator" 200
 
 
 WorldBegin
+	LightSource "shaders/occlusionlight1" 1 "samples" 16
+	Attribute "visibility" "int diffuse" 1   # make objects visible to rays
+    Attribute "visibility" "int specular" 1   # make objects visible to rays
+    Attribute "trace" "bias" 0.005
+
   #  TransformBegin
     Translate 0 0 1
      LightSource "ambientlight" 1 "intensity" 0.2
      # LightSource "shaders/spotlight" 1 "intensity" [100] "from" [5 6 -5] "to" [0 0 0]
      # LightSource "shaders/spotlight" 1 "intensity" [100] "from" [-4 6 -5] "to" [0 1 0]
-     LightSource "shaders/spotlight" 1 "intensity" [10] "from" [0 1 -2] "to" [1 0 -2]
-     LightSource "shaders/spotlight" 1 "intensity" [10] "from" [0 1 -2] "to" [-1 0 -2]
-     LightSource "shaders/spotlight" 1 "intensity" [100] "from" [0 -2 -10] "to" [0 5 0]
+     # LightSource "shaders/spotlight" 1 "intensity" [10] "from" [0 1 -2] "to" [1 0 -2]
+     # LightSource "shaders/spotlight" 1 "intensity" [10] "from" [0 1 -2] "to" [-1 0 -2]
+     # LightSource "shaders/spotlight" 1 "intensity" [100] "from" [0 -2 -10] "to" [0 5 0]
      ReadArchive "lights.rib"
   # TransformEnd
   Attribute "trace" "int maxdiffusedepth" [2]
@@ -31,14 +36,19 @@ WorldBegin
   # Surface "shaders/plastic_with_texture" "texturemap" ["textures/grid.tex"]
   
   TransformBegin
-  Translate -0.5 -0.5 -1
-  Surface "shaders/metal"
-  	Sphere 0.3 -0.4 -1 360.0
-	Translate 0.5 0.5 2
-	Translate 0.6 -0.5 -2
+
+	AttributeBegin
+		Translate -0.7 -0.5 -1.5
+		Surface "shaders/metal"
+	  	Sphere 0.3 -0.4 -1 360.0
+	  	Translate 0.7 0.5 1.5
+  	AttributeEnd
+  	AttributeBegin
+  	Translate 0.6 -0.5 -2
   Surface "shaders/transparent"
   	Sphere 0.2 -0.2 -0.3 360.0
-	Translate -0.6 0.5 2
+  	Translate -0.6 0.5 2
+  	AttributeEnd
   Surface "shaders/plastic_with_texture"
   Color [0 0.8 0.1]
   Polygon "P" [1.2 -1 0 1.2 1 0 1.5 1 -5 1.5 -1 -5] "st" [0 0 0 1 1 1 1 0]
@@ -53,7 +63,9 @@ WorldBegin
   # Color [1 1 1]
   Polygon "P" [-1.2 1 0 1.2 1 0 1.5 1 -5 -1.5 1 -5] "st" [0 0 0 1 1 1 1 0]
   # Color [1 1 1]
+  AttributeBegin
   Polygon "P" [-1.2 -1 0 1.2 -1 0 1.5 -1 -5 -1.5 -1 -5] "st" [0 0 0 1 1 1 1 0]
+  AttributeEnd
   # Color [1 1 1]
   # Polygon "P" [-1.2 -1 0 -1.2 1 0 1.2 1 0 1.2 -1 0] "st" [0 0 0 1 1 1 1 0]
     # "st" [0 0 0 1 1 1 1 0]
