@@ -1,13 +1,13 @@
 shader_obj 5.0 1 0
 texsurf 54 10 23 14 40 0 7 7 0 7 13 1
-13 190
+13 191
 rgb
 current
 !!anyspace!!
 /home/lokit/Desktop/advanced_graphics/prman_intro_samples/shaders
 .:
-texturf.sl
-textures/wood.tex
+texsurf.sl
+textures/grass.tex
 caus.cpm
 estimator
 surface

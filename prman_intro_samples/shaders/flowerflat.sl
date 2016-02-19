@@ -1,9 +1,9 @@
-surface plastic_with_texture_e
+surface flowerflat
 (
-  string texturemap = "textures/pebbles.tex";
-  float Ks=.7;
-  float Kd=.7;
-  float Ka=1, roughness=.2;
+  string texturemap = "textures/flowers_flat.dis";
+  float Ks=.5;
+  float Kd=.5;
+  float Ka=1, roughness=.1;
   color specularcolor=1
 )
 {

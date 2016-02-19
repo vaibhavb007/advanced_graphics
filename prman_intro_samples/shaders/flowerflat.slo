@@ -1,12 +1,12 @@
 shader_obj 5.0 1 0
-plastic_with_texture 39 4 15 9 27 0 6 6 0 6 13 1
-10 181
+flowerflat 39 4 15 9 27 0 6 6 0 6 13 1
+10 169
 rgb
 current
 /home/lokit/Desktop/advanced_graphics/prman_intro_samples/shaders
 .:
-plastic_with_texture.sl
-textures/ratEnvInterior.tex
+flowerflat.sl
+textures/flowers_flat.dis
 surface
 
 $meta_2006

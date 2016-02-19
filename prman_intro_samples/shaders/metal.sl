@@ -1,8 +1,8 @@
 surface
 metal
 (
-    float Ka=1,
-          Ks=3,
+    float Ka=0.4,
+          Ks=0.6,
           Kd=0.5,
           Kr=0.8,
           Kt=0,

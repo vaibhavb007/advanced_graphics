@@ -1,6 +1,6 @@
 surface plastic_with_texture
 (
-  string texturemap = "textures/grid.tex";
+  string texturemap = "textures/ratEnvInterior.tex";
   float Ks=.5;
   float Kd=.5;
   float Ka=1, roughness=.1;
