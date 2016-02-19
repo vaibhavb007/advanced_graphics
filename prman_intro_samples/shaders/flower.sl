@@ -2,7 +2,7 @@ surface flower
 (
   string texturemap = "textures/mona_smile.tex";
   float Ks=.5;
-  float Kd=.5;
+  float Kd=.9;
   float Ka=1, roughness=.1;
   color specularcolor=1
 )

@@ -15,17 +15,19 @@ Attribute "photon" "estimator" 200
 
 
 WorldBegin
-	LightSource "shaders/occlusionlight1" 1 "samples" 256
+	LightSource "shaders/occlusionlight1" 1
 	Attribute "visibility" "int diffuse" 1   # make objects visible to rays
     Attribute "visibility" "int specular" 1   # make objects visible to rays
     Attribute "trace" "bias" 0.005
 
   #  TransformBegin
     Translate 0 0 1
-     LightSource "shaders/spotlight" 1 "intensity" [100] "from" [5 6 -5] "to" [0 0 0]
-     LightSource "shaders/spotlight" 1 "intensity" [100] "from" [-4 6 -5] "to" [0 0 0]
-     LightSource "shaders/spotlight" 1 "intensity" [10] "from" [0 1 -2] "to" [0 0 -2]
-     LightSource "shaders/spotlight" 1 "intensity" [100] "from" [0 -2 -10] "to" [0 5 0]
+     # LightSource "shaders/spotlight" 1 "intensity" [100] "from" [5 6 -5] "to" [0 0 0]
+     # LightSource "shaders/spotlight" 1 "intensity" [100] "from" [-4 6 -5] "to" [0 1 0]
+     # LightSource "shaders/spotlight" 1 "intensity" [10] "from" [0 1 -2] "to" [1 0 -2]
+     # LightSource "shaders/spotlight" 1 "intensity" [10] "from" [0 1 -2] "to" [-1 0 -2]
+     # LightSource "shaders/spotlight" 1 "intensity" [100] "from" [0 -2 -10] "to" [0 5 0]
+     ReadArchive "lights.rib"
   # TransformEnd
   Attribute "trace" "int maxdiffusedepth" [2]
   	
@@ -33,21 +35,16 @@ WorldBegin
   # Surface "shaders/plastic_with_texture" "texturemap" ["textures/grid.tex"]
   
   TransformBegin
-	AttributeBegin
-		Translate -0.5 -0.5 -1
+		Translate -0.7 -0.5 -1.5
 		Surface "shaders/metal"
-	  	Sphere 0.2 -0.2 -0.3 360.0
-	  	Translate 0.5 0.5 1
-  	AttributeEnd
-  	AttributeBegin
+	  	Sphere 0.3 -0.4 -1 360.0
+	  	Translate 0.7 0.5 1.5
   	Translate 0.6 -0.5 -2
   Surface "shaders/transparent"
   	Sphere 0.2 -0.2 -0.3 360.0
   	Translate -0.6 0.5 2
-  	AttributeEnd
 
-  AttributeBegin
-  Surface "shaders/texturf"
+  Surface "shaders/plastic_with_texture"
   Color [0 0.8 0.1]
   Polygon "P" [1.2 -1 0 1.2 1 0 1.5 1 -5 1.5 -1 -5] "st" [0 0 0 1 1 1 1 0]
   # Color [1 1 0]
@@ -56,16 +53,84 @@ WorldBegin
   Polygon "P" [-1.2 -1 0 -1.2 1 0 -1.5 1 -5 -1.5 -1 -5] "st" [0 0 0 1 1 1 1 0]
   # Color [1 1 1]
   Surface "shaders/plastic1"
-  Polygon "P" [-1.2 -1 0 -1.2 1 0 1.2 1 0 1.2 -1 0] "st" [0 0 0 1 1 1 1 0]
+  # Color [0.9 0.1 0]
+  Polygon "P" [-1.2 -1 0 1.2 -1 0 1.2 1 0 -1.2 1 0 ] "st" [0 0 0 1 1 1 1 0]
   # Color [1 1 1]
   Polygon "P" [-1.2 1 0 1.2 1 0 1.5 1 -5 -1.5 1 -5] "st" [0 0 0 1 1 1 1 0]
   # Color [1 1 1]
   Polygon "P" [-1.2 -1 0 1.2 -1 0 1.5 -1 -5 -1.5 -1 -5] "st" [0 0 0 1 1 1 1 0]
-  AttributeEnd
   # Color [1 1 1]
   # Polygon "P" [-1.2 -1 0 -1.2 1 0 1.2 1 0 1.2 -1 0] "st" [0 0 0 1 1 1 1 0]
     # "st" [0 0 0 1 1 1 1 0]
+    Surface "shaders/constant"
+
+  	TransformBegin
+  		Translate 0.2 0.7 -1
+  		Scale 0.75 0.75 0.75
+  		# Rotate 90  1 0 0
+		Surface "shaders/flowerflat"  		
+  		Translate 0.6 -1 0
+		Scale 0.3 0.7 0.7
+		Rotate 90 1 0 0
+		Sphere 1 0.6 -0.6 360.0
+		Disk 0.6 0.8 360
+		Disk -0.6 0.8 360
+		Surface "shaders/plastic1"
+		#neck
+		Cylinder 0.3 -0.6 -0.8 360
+		#head
+		TransformBegin
+			Scale 1 1 0.5
+			Translate 0 0 -2
+			Sphere 0.65 0.5 -0.5 360
+		TransformEnd
+		#rightleg
+		TransformBegin
+			Scale 1 1 2
+			Translate 0.5 0 0.5
+			Rotate -90 1 0 0
+			Sphere 0.4 0.4 -0.4 360
+		TransformEnd
+		#leftleg
+		TransformBegin
+			Scale 1 1 2
+			Translate -0.5 0 0.5
+			Rotate -90 1 0 0
+			Sphere 0.4 0.4 -0.4 360
+		TransformEnd
+		#righthand
+		TransformBegin
+			Translate 1.5 0 -0.3
+			Rotate -15 0 1 0
+			Scale 1.8 0.5 0.5
+			Sphere 0.5 0.5 -0.5 360
+			#forehand
+			TransformBegin
+				Translate 0.4 -0.1 0.7
+				Rotate 90 0 1 0
+				Scale 1.8 0.5 0.5
+				Sphere 0.4 0.4 -0.4 360
+			TransformEnd
+		TransformEnd
+		#hand
+		TransformBegin
+			Translate -1.5 0 -0.3
+			Rotate 15 0 1 0
+			Scale 1.8 0.5 0.5
+			Sphere 0.5 0.5 -0.5 360
+			#forehand
+			TransformBegin
+				Translate -0.4 -0.1 0.7
+				Rotate 90 0 1 0
+				Scale 1.8 0.5 0.5
+				Sphere 0.4 0.4 -0.4 360
+			TransformEnd
+		TransformEnd
+	TransformEnd
+
+
     Surface "shaders/plastic_with_texture_e"
+    	Translate -0.3 0 0
     	Translate 0 -0.3 -1.2
 		Rotate -90 1 0 0
 		Rotate 90 0 0 1
@@ -91,7 +156,7 @@ WorldBegin
 	    Translate 0 0 0
 	    Rotate 180 0 1 0
 	    Surface "shaders/metal"
-	    Color 0 0 0
+	    # Color 0 0 0
 	    Paraboloid 0.9 0.4 0.9 360
 	    Color 1 1 1 
   	TransformEnd
@@ -109,69 +174,10 @@ WorldBegin
 	    Translate 0 0 0
 	    Rotate 180 0 1 0
 	    Surface "shaders/metal"
-	    Color 0 0 0 
+	    # Color 0 0 0 
 	    Paraboloid 0.9 0.4 0.9 360 
   	TransformEnd 
-  	Surface "shaders/constant"
-
-  	TransformBegin
-  		Scale 0.2 0.2 0.2
-		Scale 0.3 0.7 0.7
-		Rotate 90 1 0 0
-		Sphere 1 0.6 -0.6 360.0
-		Disk 0.6 0.8 360
-		Disk -0.6 0.8 360
-		#neck
-		Cylinder 0.3 -0.6 -0.8 360
-		#head
-		TransformBegin
-			Scale 1 1 0.5
-			Translate 0 0 -2
-			Sphere 0.5 0.4 -0.4 360
-		TransformEnd
-		#rightleg
-		TransformBegin
-			Scale 1 1 2
-			Translate 0.5 0 0.5
-			Rotate -90 1 0 0
-			Sphere 0.4 0.4 -0.4 360
-		TransformEnd
-		#leftleg
-		TransformBegin
-			Scale 1 1 2
-			Translate -0.5 0 0.5
-			Rotate -90 1 0 0
-			Sphere 0.4 0.4 -0.4 360
-		TransformEnd
-		#righthand
-		TransformBegin
-			Translate 1.5 0 -0.3
-			Rotate -15 0 1 0
-			Scale 1.8 0.5 0.5
-			Sphere 0.5 0.5 -0.5 360
-			#forehand
-			TransformBegin
-				Translate 0.4 0 0.4
-				Rotate 90 0 1 0
-				Scale 1.8 0.5 0.5
-				Sphere 0.4 0.4 -0.4 360
-			TransformEnd
-		TransformEnd
-		#hand
-		TransformBegin
-			Translate -1.5 0 -0.3
-			Rotate 15 0 1 0
-			Scale 1.8 0.5 0.5
-			Sphere 0.5 0.5 -0.5 360
-			#forehand
-			TransformBegin
-				Translate -0.4 0 0.4
-				Rotate 90 0 1 0
-				Scale 1.8 0.5 0.5
-				Sphere 0.4 0.4 -0.4 360
-			TransformEnd
-		TransformEnd
-	TransformEnd
+  	
   TransformEnd
   
 WorldEnd
