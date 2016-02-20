@@ -8,14 +8,12 @@ Option "photon" "emit" 100000
 Option "photon" "string lifetime" "transient"
 Attribute "photon" "causticmap" "spcaustic.ptc"
 
-Translate 0 0 4	
-
-# Attribute "visibility" "int diffuse" [1]
-# Attribute "visibility" "int specular" [1]
-# Attribute "visibility" "int transmission" [1]
-# Attribute "photon" "causticmap" "caus.cpm"
-# Attribute "photon" "estimator" 200
-# Attribute "trace" "maxspeculardepth" 5
+# Rotate -20 0 1 0
+Rotate 15  1 0 0
+Rotate 20  0 1 0
+# Rotate 10  0 0 1
+Translate -0.8 0.9 1
+ # Rotate 200  0 1 0
 
 
 WorldBegin
@@ -47,7 +45,7 @@ WorldBegin
   # Surface "shaders/plastic_with_texture" "texturemap" ["textures/grid.tex"]
   
   TransformBegin
-
+    # Translate 0 0 0
 	# AttributeBegin
 		Translate -0.7 -0.6 -3
 		# Attribute "photon" "shadingmodel" "chrome"
@@ -62,7 +60,7 @@ WorldBegin
   	Translate 0.6 -0.83 -2
   	# Translate 0 0 -0.2
   # Surface "shaders/transparent"
-  Attribute "photon" "shadingmodel" "water"
+  # Attribute "photon" "shadingmodel" "water"
   Attribute "photon" "shadingmodel" "glass"
     Surface "plausibleGlass""float minSpecularSamples" 25
 
