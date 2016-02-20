@@ -1,9 +1,9 @@
 num_x = 10
 num_y = 2
 num_z = 15
-start_x = 0
-start_y = 0.7
-start_z = -3
+start_x = -2
+start_y = 7
+start_z = 0
 step_x = 0.015
 step_y = 0.015
 step_z = 0.015
