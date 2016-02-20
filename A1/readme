@@ -1,0 +1,12 @@
+To run the program, execute the following commands:
+cd shaders
+shader *.sl
+cd ..
+prman -d x11 final.rib
+
+The documentation can be found here:
+www.cse.iitb.ac.in/~vaibhavb/cs775/Assignment1.html
+
+References:
+1. Official documentation of Renderman
+2. Slides of guest lecture
