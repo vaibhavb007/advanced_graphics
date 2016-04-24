@@ -10,7 +10,6 @@
 #include <sstream>
 #include <vector>
 #include <math.h>
-
 using namespace std;
 
 class Board;
@@ -81,6 +80,7 @@ int Board::periodic() {
 	redraw();
 	Fl::repeat_timeout (0.5,timeractions,this);
 }
+
 
 
 
