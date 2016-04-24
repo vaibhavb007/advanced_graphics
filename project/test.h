@@ -18,7 +18,10 @@ class spatial{
 	double x;
 	double y;
 public:
-	spatial(int x, int y);
+	spatial(double x, double y);
+	void setposition(double x, double y);
+	double getx();
+	double gety();
 };
 
 class motion{
@@ -47,7 +50,7 @@ class sample{
 		appearance a;
 		temporal t;
 	public:
-		sample();
+		sample(double x, double y, int timestamp, int id);
 };
 
 class Board : public Fl_Widget{
