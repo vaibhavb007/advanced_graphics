@@ -12,9 +12,6 @@
 #include <math.h>
 #include "test.h"
 using namespace std;
-bool stroke_started=false;
-sample *last_sample;
-
 
 spatial :: spatial(double x, double y){
 	this->x = x;
@@ -67,7 +64,7 @@ Board::Board() : Fl_Widget (0,0,1600,700,"Tetris") {
 }
 
 void Board::add_sample(sample s){
-	this->samples.push_back(s);
+	// this->samples.push_back(s);
 }
 	
 void Board::draw(){
@@ -77,21 +74,34 @@ void Board::draw(){
 int Board::handle(int e) {
 
     switch (e){
+    	case FL_PUSH:
+    		int x_coord = event_x();
+    		int y_coord = event_y();
+    		drawing *dwg = &(this->drawings[this->drawings.size()-1]);
+			// dwg.strokes.push_back(*l);
+			int temp_id,temp_tstamp;
+			temp_id=dwg->samples.size();
+			temp_tstamp=this->drawings.size();
+			sample *l = new sample(x_coord,y_coord,temp_id,temp_tstamp);
+   			dwg->samples.push_back(*l);
+			break;
+
     	case FL_DRAG:
     		int x_coord = event_x();
     		int y_coord = event_y();
-    		sample l = new sample(x_coord,y_coord,);
+    		int temp_id,temp_tstamp;
 
-    		if(!stroke_started){
-    			last_sample= l;
-    			add_sample(l);
-    			stroke_started=true;
-    		}
-    	
-    		if(spatial_dist(last_sample->p,l->p) > 2){
-    			add_sample(l);
-    		}
+    		drawing *dwg = &(this->drawings[this->drawings.size()-1]);
+			sample last_sample = dwg->samples[dwg->samples.size()];
+			spatial *new_s = new spatial(x_coord,y_coord);
 
+    		if(spatial_dist(last_sample->p,*s) > 2){
+    			temp_id=dwg->samples.size();
+				temp_tstamp=this->drawings.size();
+				sample *l = new sample(x_coord,y_coord,temp_id,temp_tstamp);
+    			dwg->samples.push_back(*l);
+    		}
+    		break;
 
     }
 }

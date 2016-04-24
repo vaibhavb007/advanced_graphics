@@ -45,6 +45,7 @@ public:
 };
 
 class sample{
+		bool prev;
 		spatial p;
 		motion m;
 		appearance a;
