@@ -15,6 +15,48 @@ using namespace std;
 
 class Board;
 
+class spatial{
+	double x;
+	double y;
+public:
+	position(int x, int y);
+};
+
+class motion{
+	double rot[2][2];
+	double trans[2];
+public:
+	motion();
+};
+
+class appearance{
+	int color;
+public:
+	appearance();
+};
+
+class temporal{
+	int timestamp;
+	int id;
+public:
+	temporal(int timestamp, int id);
+};
+
+class sample{
+	spatial p;
+	motion m;
+	appearance a;
+	temporal t;
+public:
+	sample();
+};
+
+class Board : public Fl_Widget{
+	vector<sample> samples;
+	public:
+	Board();
+};
+
 
 
 int main(){
