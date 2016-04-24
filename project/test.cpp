@@ -10,7 +10,6 @@
 #include <sstream>
 #include <vector>
 #include <math.h>
-
 using namespace std;
 
 class Board;
@@ -19,7 +18,7 @@ class spatial{
 	double x;
 	double y;
 public:
-	position(int x, int y);
+	spatial(int x, int y);
 };
 
 class motion{
@@ -55,7 +54,14 @@ class Board : public Fl_Widget{
 	vector<sample> samples;
 	public:
 	Board();
+	int periodic();
+	void draw();
+	int handle(int e);
 };
+
+void timeractions(void *p) {
+	((Board *)p)->periodic ();
+}
 
 
 
