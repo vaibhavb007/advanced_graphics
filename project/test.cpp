@@ -12,13 +12,17 @@
 #include <math.h>
 #include "test.h"
 using namespace std;
-bool stroke_started=false;
-sample *last_sample;
+
+
 
 
 spatial :: spatial(double x, double y){
 	this->x = x;
 	this->y = y;
+}
+
+spatial :: spatial(){
+	
 }
 
 void spatial :: setposition(double x, double y){
@@ -51,47 +55,146 @@ temporal :: temporal(int timestamp, int id){
 	this -> timestamp = timestamp;
 	this -> id = id;
 }
+temporal :: temporal(){
+}
 
-sample :: sample(double x, double y, int timestamp, int id){
-	this->p.setposition(x, y);
-	motion a();
+sample :: sample(double x, double y, int timestamp, int id, bool prev){
+	spatial z(x,y);
+	this -> p = z;
+	motion a;
 	this->m = a;
-	appearance b();
+	appearance b;
 	this-> a = b;
 	temporal c(timestamp, id);
 	this -> t = c;
+	this -> prev = prev;
 }
 
-Board::Board() : Fl_Widget (0,0,1600,700,"Tetris") {
-
+double sample :: getx(){
+	return p.getx();
 }
 
-void Board::add_sample(sample s){
+double sample :: gety(){
+	return p.gety();
+}
+
+bool sample :: get_prev(){
+	return prev;
+}
+
+void drawing::add_sample(sample s){
 	this->samples.push_back(s);
 }
 
+int drawing::get_samples_size(){
+	return this->samples.size();
+}
+
+drawing::drawing(){
+	
+}
+
+double drawing :: distance_from_last_sample(double x, double y){
+	return pow((pow((this->samples[this->samples.size()-1].getx()-x),2) + pow((this->samples[this->samples.size()-1].gety()-y),2)), 0.5);
+}
+
+double drawing :: get_x_at_index(int i){
+	return this->samples[i].getx();
+}
+
+double drawing :: get_y_at_index(int i){
+	return this->samples[i].gety();
+}
+
+bool drawing :: get_prev_at_index(int i){
+	return this->samples[i].get_prev();
+}
+
+Board::Board() : Fl_Widget (0,0,1600,700,"Tetris") {
+	drawing *d = new drawing();
+	this->drawings.push_back(*d);
+}
+
 void Board::draw(){
-		
+	int tmp = this->drawings.size();
+	if(tmp >= 2){
+		for(int i = 0; i<this->drawings[tmp-2].get_samples_size()-1; i++){
+			if(drawings[tmp-2].get_prev_at_index(i+1)){
+				fl_color(30);
+				fl_line(this->drawings[tmp-2].get_x_at_index(i), this->drawings[tmp-2].get_y_at_index(i), this->drawings[tmp-2].get_x_at_index(i+1), this->drawings[tmp-2].get_y_at_index(i+1));	
+			}
+		}
+		for(int i = 0; i<this->drawings[tmp-1].get_samples_size()-1; i++){
+			if(drawings[tmp-1].get_prev_at_index(i+1)){
+				fl_color(30);
+				fl_line(this->drawings[tmp-1].get_x_at_index(i), this->drawings[tmp-1].get_y_at_index(i), this->drawings[tmp-1].get_x_at_index(i+1), this->drawings[tmp-1].get_y_at_index(i+1));	
+			}
+		}
+	}
+	else if(tmp == 1){
+		for(int i=0; i<this->drawings[0].get_samples_size()-1;i++){
+			int x1 = this->drawings[0].get_x_at_index(i);
+			int y1 = this->drawings[0].get_y_at_index(i);
+			int x2 = this->drawings[0].get_x_at_index(i+1);
+			int y2 = this->drawings[0].get_y_at_index(i+1);
+			if(drawings[0].get_prev_at_index(i+1)){
+				fl_color(0);
+				fl_line(x1, y1, x2, y2); 	
+			}
+		}
+	}
 }
 
 int Board::handle(int e) {
 
-    switch (e){
-    	case FL_DRAG:
-    		int x_coord = event_x();
-    		int y_coord = event_y();
-    		sample l = new sample(x_coord,y_coord,);
+	switch (e){
+		case FL_PUSH:
+			{
+				int x_coord = Fl::event_x();
+				int y_coord = Fl::event_y();
+				drawing *dwg = &(this->drawings[this->drawings.size()-1]);
+				// dwg.strokes.push_back(*l);
+				int temp_id,temp_tstamp;
+				temp_id=dwg->get_samples_size();
+				temp_tstamp=this->drawings.size();
+				sample *l = new sample(x_coord,y_coord,temp_id,temp_tstamp, false);
+				dwg->add_sample(*l);
+				break;
+			}
+		case FL_DRAG:
+			{	int x_coord = Fl::event_x();
+				int y_coord = Fl::event_y();
+				int temp_id,temp_tstamp;
+	
+				drawing *dwg = &(this->drawings[this->drawings.size()-1]);
+				// sample last_sample = dwg->samples[dwg->samples.size()-1];
+				spatial *new_s = new spatial(x_coord,y_coord);
+	
+				if(dwg->distance_from_last_sample(x_coord, y_coord) > 0.2){
+					temp_id=dwg->get_samples_size();
+					temp_tstamp=this->drawings.size();
+					sample *l = new sample(x_coord,y_coord,temp_id,temp_tstamp, true);
+					dwg->add_sample(*l);
+				}
+				break;
+			}
+			
 
-    		if(!stroke_started){
-    			last_sample= l;
-    			add_sample(l);
-    			stroke_started=true;
-    		}
-
-    		if(spatial_dist(last_sample->p,l->p) > 2){
-    			add_sample(l);
-    		}
-    }
+		case FL_RELEASE:
+			{
+				int x_coord = Fl::event_x();
+				int y_coord = Fl::event_y();
+				drawing *dwg = &(this->drawings[this->drawings.size()-1]);
+				// dwg.strokes.push_back(*l);
+				int temp_id,temp_tstamp;
+				temp_id=dwg->get_samples_size();
+				temp_tstamp=this->drawings.size();
+				sample *l = new sample(x_coord,y_coord,temp_id,temp_tstamp, true);
+				dwg->add_sample(*l);
+				break;
+			}
+	}
+	redraw();
 }
 
 void timeractions(void *p) {
@@ -100,7 +203,7 @@ void timeractions(void *p) {
 
 int Board::periodic(){
 	redraw();
-	Fl::repeat_timeout (0.5,timeractions,this);
+	Fl::repeat_timeout (0.1,timeractions,this);
 	return 1;
 }
 

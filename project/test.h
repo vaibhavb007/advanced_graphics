@@ -18,6 +18,7 @@ class spatial{
 	double x;
 	double y;
 public:
+	spatial();
 	spatial(double x, double y);
 	void setposition(double x, double y);
 	double getx();
@@ -41,26 +42,34 @@ class temporal{
 	int timestamp;
 	int id;
 public:
+	temporal();
 	temporal(int timestamp, int id);
 };
 
 class sample{
+		bool prev;
 		spatial p;
 		motion m;
 		appearance a;
 		temporal t;
 	public:
-		sample(double x, double y, int timestamp, int id);
+		sample(double x, double y, int timestamp, int id, bool prev);
+		double getx();
+		double gety();
+		bool get_prev();
 };
 
 class drawing{
 	int id;
 	vector<sample> samples;
-	
 	public:
-
 	drawing();
-	
+	void add_sample(sample s);
+	int get_samples_size();
+	double distance_from_last_sample(double x, double y);
+	double get_x_at_index(int i);
+	double get_y_at_index(int i);
+	bool get_prev_at_index(int i);
 };
 
 class Board : public Fl_Widget{
@@ -68,7 +77,6 @@ class Board : public Fl_Widget{
 	public:
 
 	Board();
-	void add_sample(int x, int y);
 	int periodic();	
 	void draw();
 	int handle(int e);
