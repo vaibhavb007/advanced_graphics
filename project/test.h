@@ -53,8 +53,18 @@ class sample{
 		sample(double x, double y, int timestamp, int id);
 };
 
-class Board : public Fl_Widget{
+class drawing{
+	int id;
 	vector<sample> samples;
+	
+	public:
+
+	drawing();
+	
+};
+
+class Board : public Fl_Widget{
+	vector<drawing> drawings;
 	public:
 
 	Board();

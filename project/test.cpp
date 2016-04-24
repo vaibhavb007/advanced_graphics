@@ -12,6 +12,9 @@
 #include <math.h>
 #include "test.h"
 using namespace std;
+bool stroke_started=false;
+sample *last_sample;
+
 
 spatial :: spatial(double x, double y){
 	this->x = x;
@@ -63,12 +66,34 @@ Board::Board() : Fl_Widget (0,0,1600,700,"Tetris") {
 
 }
 
-void Board::add_sample(int x, int y){
-	sample s;
+void Board::add_sample(sample s){
+	this->samples.push_back(s);
 }
-
+	
 void Board::draw(){
 		
+}
+
+int Board::handle(int e) {
+
+    switch (e){
+    	case FL_DRAG:
+    		int x_coord = event_x();
+    		int y_coord = event_y();
+    		sample l = new sample(x_coord,y_coord,);
+
+    		if(!stroke_started){
+    			last_sample= l;
+    			add_sample(l);
+    			stroke_started=true;
+    		}
+    	
+    		if(spatial_dist(last_sample->p,l->p) > 2){
+    			add_sample(l);
+    		}
+
+
+    }
 }
 
 void timeractions(void *p) {
