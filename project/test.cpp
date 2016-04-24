@@ -19,7 +19,7 @@ class spatial{
 	double x;
 	double y;
 public:
-	position(int x, int y);
+	spatial(int x, int y);
 };
 
 class motion{
@@ -55,7 +55,33 @@ class Board : public Fl_Widget{
 	vector<sample> samples;
 	public:
 	Board();
+	int periodic();	
+	void draw(){
+		// draw
+	}
+
+	int handle(int e) {
+
+	     if (e==8) {
+          
+	     switch(Fl::event_key()) {
+				// case 65307: exit (1);  // Esc key
+				// case 65361: moveallleft(tilesize);break;  // left arrow
+			}
+	      
+      redraw();
+	}
 };
+
+void timeractions(void *p) {
+	     ((Board *)p)->periodic ();
+}
+     
+int Board::periodic() {    
+	redraw();
+	Fl::repeat_timeout (0.5,timeractions,this);
+}
+
 
 
 
