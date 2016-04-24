@@ -2,6 +2,8 @@
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/fl_draw.H>
+#include <FL/Fl_Button.H>
+#include <FL/Fl_Slider.H>
 
 #include <iostream>
 #include <cstdlib>
@@ -13,7 +15,7 @@
 using namespace std;
 
 class Board;
-
+	
 class spatial{
 	double x;
 	double y;
@@ -75,7 +77,7 @@ class drawing{
 class Board : public Fl_Widget{
 	vector<drawing> drawings;
 	public:
-
+	Fl_Button *button; 
 	Board();
 	int periodic();	
 	void draw();

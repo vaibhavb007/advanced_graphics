@@ -13,8 +13,7 @@
 #include "test.h"
 using namespace std;
 
-
-
+bool drawing_ended = false;
 
 spatial :: spatial(double x, double y){
 	this->x = x;
@@ -110,23 +109,30 @@ bool drawing :: get_prev_at_index(int i){
 	return this->samples[i].get_prev();
 }
 
+void next_drawing(Fl_Widget *, void *) {
+	drawing_ended = true;
+}
+
 Board::Board() : Fl_Widget (0,0,1600,700,"Tetris") {
 	drawing *d = new drawing();
+	button = new Fl_Button(0, 0, 50, 20, "label");
+	button->callback(next_drawing, 0);
 	this->drawings.push_back(*d);
 }
 
 void Board::draw(){
 	int tmp = this->drawings.size();
 	if(tmp >= 2){
+		cout<<tmp<<"\n";
 		for(int i = 0; i<this->drawings[tmp-2].get_samples_size()-1; i++){
 			if(drawings[tmp-2].get_prev_at_index(i+1)){
-				fl_color(30);
+				fl_color(63);
 				fl_line(this->drawings[tmp-2].get_x_at_index(i), this->drawings[tmp-2].get_y_at_index(i), this->drawings[tmp-2].get_x_at_index(i+1), this->drawings[tmp-2].get_y_at_index(i+1));	
 			}
 		}
 		for(int i = 0; i<this->drawings[tmp-1].get_samples_size()-1; i++){
 			if(drawings[tmp-1].get_prev_at_index(i+1)){
-				fl_color(30);
+				fl_color(0);
 				fl_line(this->drawings[tmp-1].get_x_at_index(i), this->drawings[tmp-1].get_y_at_index(i), this->drawings[tmp-1].get_x_at_index(i+1), this->drawings[tmp-1].get_y_at_index(i+1));	
 			}
 		}
@@ -143,6 +149,7 @@ void Board::draw(){
 			}
 		}
 	}
+	
 }
 
 int Board::handle(int e) {
@@ -150,6 +157,7 @@ int Board::handle(int e) {
 	switch (e){
 		case FL_PUSH:
 			{
+				drawing_ended = false;
 				int x_coord = Fl::event_x();
 				int y_coord = Fl::event_y();
 				drawing *dwg = &(this->drawings[this->drawings.size()-1]);
@@ -202,6 +210,11 @@ void timeractions(void *p) {
 }
 
 int Board::periodic(){
+	if(drawing_ended){
+		drawing *d = new drawing();
+		this->drawings.push_back(*d);
+		drawing_ended = false;
+	}
 	redraw();
 	Fl::repeat_timeout (0.1,timeractions,this);
 	return 1;
